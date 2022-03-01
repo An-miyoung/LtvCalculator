@@ -14,8 +14,8 @@ const FileUploadContainer = styled.div`
   margin-top: 65px;
   margin-left: 115px;
   margin-right: 115px;
-  border: 2px dashed #4a73f3;
-  border-radius: 10px;
+  /* border: 2px dashed #4a73f3;
+  border-radius: 10px; */
 `;
 
 const LtvStep1: React.FC = () => {

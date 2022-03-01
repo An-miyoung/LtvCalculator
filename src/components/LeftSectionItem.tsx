@@ -1,6 +1,6 @@
 import useDispatchContext from "hooks/useDispatchContext";
 import { LeftSectionDisplay } from "../types";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Step = styled.div`
