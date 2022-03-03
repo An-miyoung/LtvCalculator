@@ -21,7 +21,7 @@ const DropZone = styled.div`
   position: absolute;
   width: 650px;
   height: 257px;
-  border: 2px dashed #4a73f3;
+  /* border: 2px dashed #4a73f3; */
   border-radius: 10px;
   cursor: pointer;
   &:focus {
@@ -91,9 +91,9 @@ const DragDropInput: FunctionComponent<{ setFile: Dispatch<any> }> = ({
             <FileUploadDesc>파일을 여기로 드래그하세요</FileUploadDesc>
           </DropZone>
         ) : (
-          <DropZone>
+          <DropZone style={{ border: "2px dashed #4a73f3" }}>
             <FileUploadDesc>파일을 여기로 드래그하세요</FileUploadDesc>
-            <FileUploadButton>컴퓨터에서 파일 선택</FileUploadButton>
+            {/* <FileUploadButton>컴퓨터에서 파일 선택</FileUploadButton> */}
           </DropZone>
         )}
       </FileInput>

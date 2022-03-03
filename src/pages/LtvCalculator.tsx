@@ -8,6 +8,7 @@ import LtvStep1 from "../components/LtvStep1";
 const Base = styled.div`
   width: 1440px;
   height: 803px;
+  margin: 0 auto;
   border: 1px solid black;
 `;
 

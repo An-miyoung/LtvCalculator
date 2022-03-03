@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, FunctionComponent, Dispatch } from "react";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
+import { UserInputType } from "../../types";
 
 const Select = styled.select`
   width: 272px;
@@ -12,6 +12,10 @@ const Select = styled.select`
   font-size: 16px;
   line-height: 21px;
   color: #000000;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 `;
 
 enum CategoryEnum {
@@ -26,26 +30,30 @@ enum CategoryEnum {
 }
 
 type FormData = {
-  category: CategoryEnum;
+  category?: CategoryEnum;
 };
 
-export default function DataInput() {
-  const [result, setResult] = useState("");
+const CategorySelect: FunctionComponent<{
+  setUserInputData: Dispatch<any>;
+  userInputData: UserInputType;
+}> = ({ setUserInputData, userInputData }) => {
+  const [category, setCategory] = useState<FormData>({});
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+  const t = (e: any) => {
+    const value = e.target.value;
+    setCategory({ category: value });
+  };
 
-  // const onSubmit = handleSubmit((category) =>
-  //   setResult(JSON.stringify(category))
-  // );
-  const onSubmit = handleSubmit((category) => console.log(category));
+  useEffect(() => {
+    setUserInputData({
+      ...userInputData,
+      category: category.category,
+    });
+  }, [category]);
 
   return (
-    <form onSubmit={onSubmit}>
-      <Select {...register("category")}>
+    <form>
+      <Select onChange={(e) => t(e)} required>
         <option value="game">게임</option>
         <option value="vehicle">교통/차량서비스</option>
         <option value="finance">금융</option>
@@ -55,7 +63,8 @@ export default function DataInput() {
         <option value="contents">컨텐츠/미디어</option>
         <option value="retail">유통/서비스</option>
       </Select>
-      <p>{result}</p>
     </form>
   );
-}
+};
+
+export default CategorySelect;

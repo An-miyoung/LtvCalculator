@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DataInput from "./forms/DataInput";
 import CategorySelect from "./forms/CategorySelect";
+import OsEnvButton from "./OsEnvButton";
+import { UserInputType } from "../types";
 
 const Container = styled.div`
   width: 880px;
@@ -55,6 +57,12 @@ const InputField = styled.div`
 `;
 
 const LtvStep2: React.FC = () => {
+  const [userInputData, setUserInputData] = useState<UserInputType>({});
+
+  useEffect(() => {
+    console.log(userInputData);
+  }, [userInputData]);
+
   return (
     <Container>
       <BackgroundImage>
@@ -71,11 +79,14 @@ const LtvStep2: React.FC = () => {
           <Title>
             <span>카테고리</span>
           </Title>
-          <InputField>
+          <div>
             <EmailText>로그인한 이메일이 출력될 예정</EmailText>
-          </InputField>
+          </div>
           <InputField>
-            <CategorySelect />
+            <CategorySelect
+              userInputData={userInputData}
+              setUserInputData={setUserInputData}
+            />
           </InputField>
         </GridContainer>
         <div style={{ marginTop: "19px" }} />
@@ -87,9 +98,16 @@ const LtvStep2: React.FC = () => {
             <span>구동환경</span>
           </Title>
           <InputField>
-            <DataInput />
+            <DataInput
+              userInputData={userInputData}
+              setUserInputData={setUserInputData}
+              title={"serviceName"}
+            />
           </InputField>
-          <InputField />
+          <OsEnvButton
+            userInputData={userInputData}
+            setUserInputData={setUserInputData}
+          />
         </GridContainer>
         <div style={{ marginTop: "36px" }} />
         <GridContainer>
@@ -100,10 +118,18 @@ const LtvStep2: React.FC = () => {
             <span>최장유지일</span>
           </Title>
           <InputField>
-            <DataInput />
+            <DataInput
+              userInputData={userInputData}
+              setUserInputData={setUserInputData}
+              title={"serviceUrl"}
+            />
           </InputField>
           <InputField>
-            <DataInput />
+            <DataInput
+              userInputData={userInputData}
+              setUserInputData={setUserInputData}
+              title={"dueDate"}
+            />
           </InputField>
         </GridContainer>
       </GridBox>

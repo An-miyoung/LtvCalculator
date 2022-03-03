@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, FunctionComponent, Dispatch } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { UserInputType } from "../../types";
 
 const Input = styled.input`
   width: 272px;
@@ -14,9 +15,23 @@ const Input = styled.input`
   line-height: 21px;
   color: #000000;
   box-sizing: border-box;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+`;
+const ErrorField = styled.div`
+  position: relative;
+  top: -61px;
+  width: 272px;
+  height: 54px;
+  border: 3px solid #f3694c;
+  border-radius: 10px;
 `;
 
 const ErrorSpan = styled.span`
+  position: relative;
+  top: -61px;
   font-family: "Spoqa Han Sans Neo", sans-serif;
   font-size: 12px;
   line-height: 18px;
@@ -28,7 +43,11 @@ type FormData = {
   data: string;
 };
 
-export default function DataInput() {
+const DataInput: FunctionComponent<{
+  setUserInputData: Dispatch<any>;
+  userInputData: UserInputType;
+  title: string;
+}> = ({ setUserInputData, userInputData, title }) => {
   const [result, setResult] = useState("");
 
   const {
@@ -37,7 +56,15 @@ export default function DataInput() {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = handleSubmit((data) => setResult(JSON.stringify(data)));
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+    setResult(data.data);
+    console.log(title);
+    setUserInputData({
+      ...userInputData,
+      [title]: data.data,
+    });
+  });
 
   return (
     <form onSubmit={onSubmit}>
@@ -45,19 +72,16 @@ export default function DataInput() {
         type="text"
         {...register("data", {
           required: true,
-          pattern:
-            /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
         })}
       />
       {errors.data?.type === "required" && (
-        <ErrorSpan>필수 입력 항목입니다.</ErrorSpan>
+        <>
+          <ErrorField />
+          <ErrorSpan>필수 입력 항목입니다.</ErrorSpan>
+        </>
       )}
-      {errors.data?.type === "pattern" && (
-        <ErrorSpan style={{ color: "#F3694C" }}>
-          올바른 이메일주소가 아닙니다.
-        </ErrorSpan>
-      )}
-      <p>{result}</p>
     </form>
   );
-}
+};
+
+export default DataInput;

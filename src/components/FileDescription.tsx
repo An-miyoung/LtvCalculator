@@ -69,6 +69,8 @@ const Card = styled.div`
   height: 216px;
   margin-top: 23px;
   padding: 18px 15px;
+  background: #f5f5f5;
+  border-radius: 10px;
   box-sizing: border-box;
 `;
 
