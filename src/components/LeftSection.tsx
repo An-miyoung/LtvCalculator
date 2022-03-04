@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import useDisplayState from "hooks/useDisplayContext";
+import useDisplayState from "../hooks/useDisplayContext";
 import LeftSectionItems from "./LeftSectionItem";
 
 const Container = styled.div`
@@ -13,6 +12,8 @@ const Container = styled.div`
 
 function LeftSection() {
   const displayState = useDisplayState();
+
+  // displayState.map((display) => {});
 
   return (
     <Container>

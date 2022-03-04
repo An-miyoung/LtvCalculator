@@ -4,6 +4,8 @@ import DataInput from "./forms/DataInput";
 import CategorySelect from "./forms/CategorySelect";
 import OsEnvButton from "./OsEnvButton";
 import { UserInputType } from "../types";
+import useDisplayState from "../hooks/useDisplayContext";
+import ModalShow from "./modal/ModalShow";
 
 const Container = styled.div`
   width: 880px;
@@ -58,10 +60,20 @@ const InputField = styled.div`
 
 const LtvStep2: React.FC = () => {
   const [userInputData, setUserInputData] = useState<UserInputType>({});
+  const displayContext = useDisplayState();
 
   useEffect(() => {
     console.log(userInputData);
   }, [userInputData]);
+
+  if (Object.values(userInputData).length === 5) {
+    displayContext?.map((display) => {
+      if (display.step === "2") {
+        display.done = true;
+      }
+      console.log(display);
+    });
+  }
 
   return (
     <Container>
@@ -115,7 +127,10 @@ const LtvStep2: React.FC = () => {
             <span>서비스 URL</span>
           </Title>
           <Title>
-            <span>최장유지일</span>
+            <span>
+              최장유지일
+              <ModalShow />
+            </span>
           </Title>
           <InputField>
             <DataInput

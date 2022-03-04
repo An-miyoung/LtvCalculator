@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FunctionComponent, Dispatch } from "react";
+import React, { useState, FunctionComponent, Dispatch } from "react";
 import styled from "styled-components";
 import { UserInputType } from "../types";
 

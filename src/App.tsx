@@ -1,13 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import LtvCalculator from "./pages/LtvCalculator";
 import LtvInput from "./pages/LtvInput";
 
 function App() {
   return (
-    <div>
-      <LtvCalculator />
-      <LtvInput />
-    </div>
+    <>
+      <Routes>
+        <Route path="/ltvCal/input" element={<LtvInput />} />
+        <Route path="/ltvCal/*" element={<LtvCalculator />} />
+      </Routes>
+    </>
   );
 }
 

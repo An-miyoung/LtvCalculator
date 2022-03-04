@@ -1,12 +1,12 @@
-import useDispatchContext from "hooks/useDispatchContext";
-import { LeftSectionDisplay } from "../types";
-import React from "react";
 import styled from "styled-components";
+import useDispatchContext from "../hooks/useDispatchContext";
+import { LeftSectionDisplay } from "../types";
 
 const Step = styled.div`
   width: 200px;
   height: 40px;
   display: flex;
+  cursor: pointer;
 `;
 
 const StepLogo = styled.button`
@@ -60,12 +60,20 @@ function LeftSectionItems({ display }: displayProps) {
 
   const onActive = () => {
     if (display.isActive) return;
-    else dispatch({ type: "Active", step: display.step });
+    else if (display.done) {
+      dispatch({ type: "Active", step: display.step });
+    }
+  };
+  const handleClick = () => {
+    console.log("clicked");
+    if (display.done) {
+      console.log("next===>go");
+    }
   };
 
   return (
     <>
-      <Step key={display.step}>
+      <Step key={display.step} onClick={handleClick}>
         <StepLogo
           color={display.isActive ? "#0420BF" : "#C0C0C0"}
           onClick={onActive}

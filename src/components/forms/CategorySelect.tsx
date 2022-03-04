@@ -39,7 +39,7 @@ const CategorySelect: FunctionComponent<{
 }> = ({ setUserInputData, userInputData }) => {
   const [category, setCategory] = useState<FormData>({});
 
-  const t = (e: any) => {
+  const handleSelect = (e: any) => {
     const value = e.target.value;
     setCategory({ category: value });
   };
@@ -53,7 +53,7 @@ const CategorySelect: FunctionComponent<{
 
   return (
     <form>
-      <Select onChange={(e) => t(e)} required>
+      <Select onChange={(e) => handleSelect(e)} required>
         <option value="game">게임</option>
         <option value="vehicle">교통/차량서비스</option>
         <option value="finance">금융</option>
