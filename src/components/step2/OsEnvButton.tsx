@@ -1,13 +1,15 @@
 import React, { useState, FunctionComponent, Dispatch } from "react";
 import styled from "styled-components";
-import { UserInputType } from "../types";
+import { UserInputType } from "../../types";
 
 interface BtnProps {
   readonly isActive?: boolean;
 }
 
 const OsBtnContainer = styled.div`
-  width: 290px;
+  display: flex;
+  width: 272px;
+  justify-content: space-between;
 `;
 
 const OsEnvBtn = styled.button<BtnProps>`
@@ -18,7 +20,6 @@ const OsEnvBtn = styled.button<BtnProps>`
   filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.1))
     drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
   border-radius: 6px;
-  margin-right: 13px;
   font-family: "Spoqa Han Sans Neo", sans-serif;
   font-weight: bold;
   font-size: 14px;

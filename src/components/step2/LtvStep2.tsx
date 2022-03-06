@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import DataInput from "./forms/DataInput";
-import CategorySelect from "./forms/CategorySelect";
+import DataInput from "../forms/DataInput";
+import CategorySelect from "../forms/CategorySelect";
 import OsEnvButton from "./OsEnvButton";
-import { UserInputType } from "../types";
-import useDisplayState from "../hooks/useDisplayContext";
-import ModalShow from "./modal/ModalShow";
+import { UserInputType } from "../../types";
+import useDisplayState from "../../hooks/useDisplayContext";
+import ModalShow from "../modal/ModalShow";
 
 const Container = styled.div`
   width: 880px;
@@ -79,7 +79,7 @@ const LtvStep2: React.FC = () => {
     <Container>
       <BackgroundImage>
         <img
-          src={require("../assets/backgroundImg.png")}
+          src={require("../../assets/backgroundImg.png")}
           alt="City landscape"
         />
       </BackgroundImage>
@@ -129,7 +129,14 @@ const LtvStep2: React.FC = () => {
           <Title>
             <span>
               최장유지일
-              <ModalShow />
+              <ModalShow
+                modalTitle={"최장유지일(retention days)이란?"}
+                descripton={
+                  "한번 유입된 고객이 자사의 고객으로 머무는 시간을 의미한다."
+                }
+                top={"260px"}
+                left={"400px"}
+              />
             </span>
           </Title>
           <InputField>

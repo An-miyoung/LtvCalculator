@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
 import Info from "../../assets/info.png";
@@ -14,6 +14,9 @@ const Button = styled.button`
 `;
 
 const ModalBody = styled.div`
+  position: relative;
+  top: 0;
+  left: 0;
   border-radius: 8px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   background: #fff;
@@ -24,7 +27,19 @@ const ModalBody = styled.div`
   padding-inline: 24px;
 `;
 
-function ModalShow() {
+type ModalType = {
+  modalTitle: string;
+  descripton: string;
+  top: string;
+  left: string;
+};
+
+const ModalShow: FunctionComponent<ModalType> = ({
+  modalTitle,
+  descripton,
+  top,
+  left,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpen = () => {
@@ -41,13 +56,13 @@ function ModalShow() {
         <img src={Info} alt="Information" />
       </Button>
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <ModalBody>
-          <h2>Title</h2>
-          <p>Description</p>
+        <ModalBody style={{ top: top, left: left }}>
+          <span>{modalTitle}</span>
+          <p>{descripton}</p>
         </ModalBody>
       </Modal>
     </>
   );
-}
+};
 
 export default ModalShow;

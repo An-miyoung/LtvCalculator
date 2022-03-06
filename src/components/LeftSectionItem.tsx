@@ -88,7 +88,7 @@ function LeftSectionItems({ display }: displayProps) {
           <StepDesc>{display.title}</StepDesc>
         </StepTitle>
       </Step>
-      <Line />
+      {display.step === "3" ? null : <Line />}
     </>
   );
 }

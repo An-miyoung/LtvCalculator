@@ -1,9 +1,9 @@
 import React from "react";
-import AppDisplayProvider from "provider/AppDisplayProvider";
 import styled from "styled-components";
+import AppDisplayProvider from "../provider/AppDisplayProvider";
 import Logo from "../assets/Logo.png";
 import LeftSection from "../components/LeftSection";
-import LtvStep1 from "../components/step1/LtvStep1";
+import LtvStep3 from "../components/step3/LtvStep3";
 
 const Base = styled.div`
   width: 1440px;
@@ -48,7 +48,7 @@ const Main = styled.div`
   display: flex;
 `;
 
-const LtvCalculator = () => {
+const LtvInput = () => {
   return (
     <AppDisplayProvider>
       <Base>
@@ -60,11 +60,11 @@ const LtvCalculator = () => {
         </Header>
         <Main>
           <LeftSection />
-          <LtvStep1 />
+          <LtvStep3 />
         </Main>
       </Base>
     </AppDisplayProvider>
   );
 };
 
-export default LtvCalculator;
+export default LtvInput;

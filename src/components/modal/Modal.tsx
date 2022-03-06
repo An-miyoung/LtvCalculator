@@ -6,6 +6,9 @@ import Portal from "./Portal";
 
 const Overlay = styled.div`
   position: fixed;
+  width: 1440px;
+  height: 803px;
+  margin: 0 auto;
   z-index: 10;
   top: 0;
   left: 0;
@@ -28,7 +31,7 @@ const Dim = styled.div`
 
 const Container = styled.div`
   width: 350px;
-  /* position: relative; */
+  position: relative;
 `;
 
 interface Props {
@@ -48,7 +51,7 @@ const Modal: React.FC<Props> = ({ children, selector, isOpen, onClose }) => {
       unmountOnExit
     >
       <div ref={nodeRef}>
-        <Portal selector="#modal-root">
+        <Portal>
           <Overlay>
             <Dim onClick={onClose} />
             <Container>{children}</Container>

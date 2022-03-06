@@ -1,9 +1,9 @@
 import React from "react";
-import AppDisplayProvider from "provider/AppDisplayProvider";
+import AppDisplayProvider from "../provider/AppDisplayProvider";
 import styled from "styled-components";
 import Logo from "../assets/Logo.png";
 import LeftSection from "../components/LeftSection";
-import LtvStep2 from "components/LtvStep2";
+import LtvStep2 from "../components/step2/LtvStep2";
 
 const Base = styled.div`
   width: 1440px;
