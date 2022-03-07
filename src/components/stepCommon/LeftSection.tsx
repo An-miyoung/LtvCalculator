@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import useDisplayState from "../hooks/useDisplayContext";
-import LeftSectionItems from "./LeftSectionItem";
+import useDisplayState from "../../hooks/useDisplayContext";
+import LeftSectionItem from "./LeftSectionItem";
 
 const Container = styled.div`
   width: 330px;
@@ -13,12 +13,10 @@ const Container = styled.div`
 function LeftSection() {
   const displayState = useDisplayState();
 
-  // displayState.map((display) => {});
-
   return (
     <Container>
       {displayState.map((display) => (
-        <LeftSectionItems display={display} key={display.step} />
+        <LeftSectionItem display={display} key={display.step} />
       ))}
     </Container>
   );

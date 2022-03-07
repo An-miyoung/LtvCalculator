@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent, Dispatch } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { UserInputType } from "../../types";
+import { UserInputType } from "../../../types";
 
 const Input = styled.input`
   width: 272px;

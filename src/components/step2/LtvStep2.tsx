@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import DataInput from "../forms/DataInput";
-import CategorySelect from "../forms/CategorySelect";
-import OsEnvButton from "./OsEnvButton";
+import DataInput from "./forms/DataInput";
+import CategorySelect from "./forms/CategorySelect";
+import OsEnvButton from "./forms/OsEnvButton";
 import { UserInputType } from "../../types";
 import useDisplayState from "../../hooks/useDisplayContext";
-import ModalShow from "../modal/ModalShow";
+import ModalShow from "../stepCommon/modal/ModalShow";
 
 const Container = styled.div`
   width: 880px;
@@ -95,10 +95,7 @@ const LtvStep2: React.FC = () => {
             <EmailText>로그인한 이메일이 출력될 예정</EmailText>
           </div>
           <InputField>
-            <CategorySelect
-              userInputData={userInputData}
-              setUserInputData={setUserInputData}
-            />
+            <CategorySelect />
           </InputField>
         </GridContainer>
         <div style={{ marginTop: "19px" }} />
@@ -150,7 +147,7 @@ const LtvStep2: React.FC = () => {
             <DataInput
               userInputData={userInputData}
               setUserInputData={setUserInputData}
-              title={"dueDate"}
+              title={"retentionDays"}
             />
           </InputField>
         </GridContainer>

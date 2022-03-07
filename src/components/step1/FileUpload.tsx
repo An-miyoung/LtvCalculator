@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Rocket from "../../assets/FileUploadImage.png";
 import Complete from "../../assets/uploadComplete.png";
-import DragDropInput from "../forms/DragDropInput";
+import DragDropInput from "./DragDropInput";
 import useDisplayState from "../../hooks/useDisplayContext";
 
 const Container = styled.div`

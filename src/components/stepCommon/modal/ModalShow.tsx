@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
-import Info from "../../assets/info.png";
+import Info from "../../../assets/info.png";
 
 const Button = styled.button`
   width: 14px;

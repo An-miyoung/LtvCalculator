@@ -1,6 +1,8 @@
-import React, { useEffect, useState, FunctionComponent, Dispatch } from "react";
+import React, { useEffect, useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { UserInputType } from "../../types";
+import { UserInputType } from "../../../types";
+import { userInputState } from "../../../store/inputAtom";
 
 const Select = styled.select`
   width: 272px;
@@ -29,31 +31,28 @@ enum CategoryEnum {
   retail = "retail",
 }
 
-type FormData = {
-  category?: CategoryEnum;
-};
-
-const CategorySelect: FunctionComponent<{
-  setUserInputData: Dispatch<any>;
-  userInputData: UserInputType;
-}> = ({ setUserInputData, userInputData }) => {
-  const [category, setCategory] = useState<FormData>({});
+const CategorySelect: React.FC = () => {
+  const [inputValue, setInputValue] = useState<UserInputType>({});
+  const setCategory = useSetRecoilState(userInputState);
 
   const handleSelect = (e: any) => {
     const value = e.target.value;
-    setCategory({ category: value });
+    setInputValue({ category: value });
+    setCategory((prevState) => [...prevState, inputValue]);
   };
 
+  const inputList = useRecoilValue(userInputState);
+
   useEffect(() => {
-    setUserInputData({
-      ...userInputData,
-      category: category.category,
-    });
-  }, [category]);
+    console.log("input: ", inputValue);
+    // setCategory((prevState) => [...prevState, inputValue]);
+    console.log(`userInputList: ${JSON.stringify(inputList)}`);
+  }, [inputValue]);
 
   return (
     <form>
       <Select onChange={(e) => handleSelect(e)} required>
+        <option value="none">선택해주세요.</option>
         <option value="game">게임</option>
         <option value="vehicle">교통/차량서비스</option>
         <option value="finance">금융</option>

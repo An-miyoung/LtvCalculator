@@ -6,7 +6,7 @@ export interface LeftSectionDisplay {
 }
 
 export type FormData = {
-  data: string;
+  category?: string;
 };
 
 export type UserInputType = {
@@ -14,5 +14,5 @@ export type UserInputType = {
   serviceName?: string;
   os?: string;
   serviceUrl?: string;
-  dueDate?: number;
+  retentionDays?: number;
 };

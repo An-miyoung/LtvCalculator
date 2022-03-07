@@ -2,7 +2,7 @@ import React from "react";
 import AppDisplayProvider from "provider/AppDisplayProvider";
 import styled from "styled-components";
 import Logo from "../assets/Logo.png";
-import LeftSection from "../components/LeftSection";
+import LeftSection from "../components/stepCommon/LeftSection";
 import LtvStep1 from "../components/step1/LtvStep1";
 
 const Base = styled.div`

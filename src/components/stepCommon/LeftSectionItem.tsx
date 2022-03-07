@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import useDispatchContext from "../hooks/useDispatchContext";
-import { LeftSectionDisplay } from "../types";
+import useDispatchContext from "../../hooks/useDispatchContext";
+import { LeftSectionDisplay } from "../../types";
 
 const Step = styled.div`
   width: 200px;
@@ -55,7 +55,7 @@ type displayProps = {
   display: LeftSectionDisplay;
 };
 
-function LeftSectionItems({ display }: displayProps) {
+function LeftSectionItem({ display }: displayProps) {
   const dispatch = useDispatchContext();
 
   const onActive = () => {
@@ -79,7 +79,7 @@ function LeftSectionItems({ display }: displayProps) {
           onClick={onActive}
         >
           <img
-            src={require(`../assets/step${display.step}.png`)}
+            src={require(`../../assets/step${display.step}.png`)}
             alt={`step${display.step}`}
           />
         </StepLogo>
@@ -93,4 +93,4 @@ function LeftSectionItems({ display }: displayProps) {
   );
 }
 
-export default LeftSectionItems;
+export default LeftSectionItem;

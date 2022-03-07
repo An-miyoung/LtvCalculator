@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent, Dispatch } from "react";
 import styled from "styled-components";
-import { UserInputType } from "../../types";
+import { UserInputType } from "../../../types";
 
 interface BtnProps {
   readonly isActive?: boolean;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import LtvCalculator from "./pages/LtvCalculator";
 import LtvInput from "./pages/LtvInput";
