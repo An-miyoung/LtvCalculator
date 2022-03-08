@@ -14,5 +14,7 @@ export type UserInputType = {
   serviceName?: string;
   os?: string;
   serviceUrl?: string;
-  retentionDays?: number;
+  retentionDays?: string;
+  validateFail?: boolean;
+  [propsName: string]: any;
 };

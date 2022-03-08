@@ -108,14 +108,14 @@ const LtvStep2: React.FC = () => {
           </Title>
           <InputField>
             <DataInput
-              userInputData={userInputData}
-              setUserInputData={setUserInputData}
-              title={"serviceName"}
+              // userInputData={userInputData}
+              // setUserInputData={setUserInputData}
+              id="serviceName"
             />
           </InputField>
           <OsEnvButton
-            userInputData={userInputData}
-            setUserInputData={setUserInputData}
+          // userInputData={userInputData}
+          // setUserInputData={setUserInputData}
           />
         </GridContainer>
         <div style={{ marginTop: "36px" }} />
@@ -138,16 +138,16 @@ const LtvStep2: React.FC = () => {
           </Title>
           <InputField>
             <DataInput
-              userInputData={userInputData}
-              setUserInputData={setUserInputData}
-              title={"serviceUrl"}
+              // userInputData={userInputData}
+              // setUserInputData={setUserInputData}
+              id="serviceUrl"
             />
           </InputField>
           <InputField>
             <DataInput
-              userInputData={userInputData}
-              setUserInputData={setUserInputData}
-              title={"retentionDays"}
+              // userInputData={userInputData}
+              // setUserInputData={setUserInputData}
+              id="retentionDays"
             />
           </InputField>
         </GridContainer>

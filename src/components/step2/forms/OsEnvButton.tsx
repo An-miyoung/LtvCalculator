@@ -1,6 +1,8 @@
 import React, { useState, FunctionComponent, Dispatch } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { UserInputType } from "../../../types";
+import { userInputState } from "../../../store/inputAtom";
 
 interface BtnProps {
   readonly isActive?: boolean;
@@ -30,11 +32,9 @@ const OsEnvBtn = styled.button<BtnProps>`
   color: ${(props) => (props.isActive ? "#fff" : "#4A73F3")};
 `;
 
-const OsEnvButton: FunctionComponent<{
-  setUserInputData: Dispatch<any>;
-  userInputData: UserInputType;
-}> = ({ setUserInputData, userInputData }) => {
+const OsEnvButton = () => {
   const [clicked, setClicked] = useState([false, false, false]);
+  const [userInput, setUserInput] = useRecoilState(userInputState);
 
   const btnList = ["Android", "IOS", "Web"];
 
@@ -43,11 +43,17 @@ const OsEnvButton: FunctionComponent<{
       return index === clickedIndex ? !c : false;
     });
     setClicked(newClicked);
-    setUserInputData({
-      ...userInputData,
+
+    setUserInput({
+      ...userInput,
       os: e.target.value,
     });
-    console.log();
+
+    // setUserInputData({
+    //   ...userInputData,
+    //   os: e.target.value,
+    // });
+    // console.log();
   };
 
   return (

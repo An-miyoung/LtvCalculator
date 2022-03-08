@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import styled from "styled-components";
 import { UserInputType } from "../../../types";
 import { userInputState } from "../../../store/inputAtom";
@@ -32,22 +32,28 @@ enum CategoryEnum {
 }
 
 const CategorySelect: React.FC = () => {
-  const [inputValue, setInputValue] = useState<UserInputType>({});
-  const setCategory = useSetRecoilState(userInputState);
+  // const [inputValue, setInputValue] = useState<UserInputType>({});
+  const [userInput, setUserInput] = useRecoilState(userInputState);
+  // const setCategory = useSetRecoilState(userInputState);
+  console.log({ userInput });
 
   const handleSelect = (e: any) => {
     const value = e.target.value;
-    setInputValue({ category: value });
-    setCategory((prevState) => [...prevState, inputValue]);
+    setUserInput({
+      ...userInput,
+      category: value,
+    });
+    // setInputValue({ category: value });
+    // setCategory((prevState) => [...prevState, inputValue]);
   };
 
-  const inputList = useRecoilValue(userInputState);
+  // const inputList = useRecoilValue(userInputState);
 
-  useEffect(() => {
-    console.log("input: ", inputValue);
-    // setCategory((prevState) => [...prevState, inputValue]);
-    console.log(`userInputList: ${JSON.stringify(inputList)}`);
-  }, [inputValue]);
+  // useEffect(() => {
+  //   console.log("input: ", inputValue);
+  //   // setCategory((prevState) => [...prevState, inputValue]);
+  //   console.log(`userInputList: ${JSON.stringify(inputList)}`);
+  // }, [inputValue]);
 
   return (
     <form>
