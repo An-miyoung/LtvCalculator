@@ -1,5 +1,4 @@
 import React from "react";
-import AppDisplayProvider from "provider/AppDisplayProvider";
 import styled from "styled-components";
 import Logo from "../assets/Logo.png";
 import LeftSection from "../components/stepCommon/LeftSection";
@@ -50,20 +49,18 @@ const Main = styled.div`
 
 const LtvCalculator = () => {
   return (
-    <AppDisplayProvider>
-      <Base>
-        <Header>
-          <LogoContianer>
-            <img src={Logo} alt="logo" />
-          </LogoContianer>
-          <LogoutBtn>로그아웃</LogoutBtn>
-        </Header>
-        <Main>
-          <LeftSection />
-          <LtvStep1 />
-        </Main>
-      </Base>
-    </AppDisplayProvider>
+    <Base>
+      <Header>
+        <LogoContianer>
+          <img src={Logo} alt="logo" />
+        </LogoContianer>
+        <LogoutBtn>로그아웃</LogoutBtn>
+      </Header>
+      <Main>
+        <LeftSection />
+        <LtvStep1 />
+      </Main>
+    </Base>
   );
 };
 

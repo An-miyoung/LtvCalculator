@@ -1,13 +1,9 @@
 export interface LeftSectionDisplay {
   step: string;
   title: string;
-  isActive: boolean;
   done: boolean;
+  [propsName: string]: any;
 }
-
-export type FormData = {
-  category?: string;
-};
 
 export type UserInputType = {
   category?: string;
@@ -15,6 +11,5 @@ export type UserInputType = {
   os?: string;
   serviceUrl?: string;
   retentionDays?: string;
-  validateFail?: boolean;
   [propsName: string]: any;
 };

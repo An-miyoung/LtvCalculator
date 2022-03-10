@@ -1,6 +1,5 @@
-import React from "react";
-import { atom, selector, useRecoilValue } from "recoil";
-import { FormData, UserInputType } from "../types";
+import { atom, selector } from "recoil";
+import { UserInputType } from "../types";
 
 export const userInputState = atom<UserInputType>({
   key: "userInputState",
@@ -10,15 +9,40 @@ export const userInputState = atom<UserInputType>({
     os: "",
     serviceUrl: "",
     retentionDays: "",
-    validateFail: false,
   },
+});
+
+export const isShowError = atom({
+  key: "isShowError",
+  default: false,
+});
+
+export const isFileError = atom({
+  key: "isFileError",
+  default: false,
 });
 
 export const inputIsComplete = selector({
   key: "inputIsComplete",
   get: ({ get }) => {
-    // const isDone = get(userInputState).length > 0;
-    // return isDone;
-    return true;
+    const obj = get(userInputState);
+    console.log(obj);
+    let objTotal = true;
+    for (let keys in obj) {
+      if (obj[keys] === "") objTotal = false;
+    }
+    return objTotal;
+  },
+});
+
+export const whichIsError = selector({
+  key: "whichError",
+  get: ({ get }) => {
+    const obj = get(userInputState);
+    let errorObj: any = [];
+    for (let keys in obj) {
+      if (obj[keys] === "") errorObj.push(keys);
+    }
+    return errorObj;
   },
 });

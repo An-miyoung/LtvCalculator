@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  userInputState,
+  isShowError,
+  inputIsComplete,
+  whichIsError,
+} from "../../store/inputAtom";
+import { StepBtnState } from "../../store/StepBtnAtom";
 import DataInput from "./forms/DataInput";
 import CategorySelect from "./forms/CategorySelect";
 import OsEnvButton from "./forms/OsEnvButton";
-import { UserInputType } from "../../types";
-import useDisplayState from "../../hooks/useDisplayContext";
 import ModalShow from "../stepCommon/modal/ModalShow";
 
 const Container = styled.div`
@@ -58,22 +64,54 @@ const InputField = styled.div`
   border-radius: 10px;
 `;
 
+const ErrorSpan = styled.span`
+  position: relative;
+  top: 0px;
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  color: #f3694c;
+  margin-left: 5px;
+`;
+
 const LtvStep2: React.FC = () => {
-  const [userInputData, setUserInputData] = useState<UserInputType>({});
-  const displayContext = useDisplayState();
+  const [userInput, setUserInput] = useRecoilState(userInputState);
+  const [displayState, setDisplaySatete] = useRecoilState(StepBtnState);
+  const errorCheck = useRecoilValue(isShowError);
+  console.log(errorCheck);
+
+  const errorList = useRecoilValue(whichIsError);
+  console.log(errorList);
+
+  let errorCompare;
+  errorList.map((error: any) => {
+    if (error === "os") {
+      errorCompare = true;
+    }
+  });
+
+  const inputComplete = useRecoilValue(inputIsComplete);
+  console.log(inputComplete);
 
   useEffect(() => {
-    console.log(userInputData);
-  }, [userInputData]);
-
-  if (Object.values(userInputData).length === 5) {
-    displayContext?.map((display) => {
-      if (display.step === "2") {
-        display.done = true;
-      }
-      console.log(display);
-    });
-  }
+    if (inputComplete) {
+      setDisplaySatete(
+        displayState?.map((display) => {
+          if (display.step === "2") {
+            console.log("진입2");
+            return {
+              ...display,
+              done: true,
+            };
+          }
+          console.log(display);
+          return display;
+        })
+      );
+      console.log("true인경우: ", userInput);
+      console.log("true인경우: ", displayState);
+    }
+  }, [inputComplete, setDisplaySatete]);
 
   return (
     <Container>
@@ -98,7 +136,7 @@ const LtvStep2: React.FC = () => {
             <CategorySelect />
           </InputField>
         </GridContainer>
-        <div style={{ marginTop: "19px" }} />
+        <div style={{ marginTop: "36px" }} />
         <GridContainer>
           <Title>
             <span>서비스명</span>
@@ -107,16 +145,22 @@ const LtvStep2: React.FC = () => {
             <span>구동환경</span>
           </Title>
           <InputField>
-            <DataInput
-              // userInputData={userInputData}
-              // setUserInputData={setUserInputData}
-              id="serviceName"
-            />
+            <DataInput id="serviceName" />
           </InputField>
-          <OsEnvButton
-          // userInputData={userInputData}
-          // setUserInputData={setUserInputData}
-          />
+          {errorCheck && errorCompare ? (
+            <div style={{ width: "272px" }}>
+              <OsEnvButton />
+              <div style={{ marginTop: "5px" }}>
+                <img
+                  src={require("../../assets/errorWarning.png")}
+                  alt="error warning"
+                />
+                <ErrorSpan>필수 입력 항목입니다.</ErrorSpan>
+              </div>
+            </div>
+          ) : (
+            <OsEnvButton />
+          )}
         </GridContainer>
         <div style={{ marginTop: "36px" }} />
         <GridContainer>
@@ -137,18 +181,10 @@ const LtvStep2: React.FC = () => {
             </span>
           </Title>
           <InputField>
-            <DataInput
-              // userInputData={userInputData}
-              // setUserInputData={setUserInputData}
-              id="serviceUrl"
-            />
+            <DataInput id="serviceUrl" />
           </InputField>
           <InputField>
-            <DataInput
-              // userInputData={userInputData}
-              // setUserInputData={setUserInputData}
-              id="retentionDays"
-            />
+            <DataInput id="retentionDays" />
           </InputField>
         </GridContainer>
       </GridBox>

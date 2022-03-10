@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import useDispatchContext from "../../hooks/useDispatchContext";
 import { LeftSectionDisplay } from "../../types";
 import { useRecoilState } from "recoil";
-import { userInputState } from "../../store/inputAtom";
+import { isShowError, isFileError } from "../../store/inputAtom";
+import { StepBtnState } from "../../store/StepBtnAtom";
 
 const Step = styled.div`
   width: 200px;
@@ -61,69 +61,54 @@ type displayProps = {
 function LeftSectionItem({ display }: displayProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
-  const dispatch = useDispatchContext();
-  const [userInput, setUserInput] = useRecoilState(userInputState);
 
-  const color = () => {
+  const [stepBtn, setStepBtn] = useRecoilState(StepBtnState);
+
+  const [errorStep1, setErrorStep1] = useRecoilState(isFileError);
+  const [errorStep2, setErrorStep2] = useRecoilState(isShowError);
+
+  const setColor = () => {
     switch (location.pathname) {
       case "/ltvCal/input":
         return display.step === "1" || display.step === "2"
           ? "#0420BF"
           : "#C0C0C0";
-      // return {
-      //   color: display.step === "1" || display.step === "2"
-      //     ? "#0420BF"
-      //     : "#C0C0C0",
-      //   img: display.step === "1"
-      //   ? "src"
-      //   : "src",
-      // }
       case "/ltvCal/result":
         return "#0420BF";
       default:
         return display.step === "1" ? "#0420BF" : "#C0C0C0";
     }
-    // display.isActive ? "#0420BF" : "#C0C0C0"
   };
-  const onActive = () => {
-    if (display.isActive) return;
-    else if (display.done) {
-      dispatch({ type: "Active", step: display.step });
-    }
-  };
+
   const handleClick = () => {
-    console.log("clicked", display);
-    if (display.step === "2") {
-      if (!userInput.category) {
-        setUserInput({
-          ...userInput,
-          validateFail: true,
-        });
-        return;
-      } else if (!userInput.serviceName) {
-        setUserInput({
-          ...userInput,
-          validateFail: true,
-        });
-        return;
-      }
-      // TODO: else if add
+    if (display.step === "2" && stepBtn[0].done) {
+      navigate("/ltvCal/input");
+    } else if (display.step === "2" && !stepBtn[0].done) {
+      setErrorStep1(true);
+    } else if (display.step === "3" && stepBtn[1].done) {
+      console.log(display.step);
+      console.log(stepBtn[1].done);
+      setErrorStep2(false);
       navigate("/ltvCal/result");
-      // if (display.done) {
-      //   console.log("next===>go");
-      // }
-    }
+    } else setErrorStep2(true);
   };
 
   return (
     <>
       <Step key={display.step} onClick={handleClick}>
-        <StepLogo color={color()} onClick={onActive}>
-          <img
-            src={require(`../../assets/step${display.step}.png`)}
-            alt={`step${display.step}`}
-          />
+        <StepLogo color={setColor()}>
+          {display.done ? (
+            <img
+              src={require(`../../assets/stepComplete.png`)}
+              alt={`step${display.step}`}
+              style={{ top: "0", left: "0" }}
+            />
+          ) : (
+            <img
+              src={require(`../../assets/step${display.step}.png`)}
+              alt={`step${display.step}`}
+            />
+          )}
         </StepLogo>
         <StepTitle>
           <StepText>STEP{display.step}</StepText>

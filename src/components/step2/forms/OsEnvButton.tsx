@@ -1,7 +1,6 @@
-import React, { useState, FunctionComponent, Dispatch } from "react";
-import { useRecoilState } from "recoil";
+import React, { useState, useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { UserInputType } from "../../../types";
 import { userInputState } from "../../../store/inputAtom";
 
 interface BtnProps {
@@ -34,6 +33,7 @@ const OsEnvBtn = styled.button<BtnProps>`
 
 const OsEnvButton = () => {
   const [clicked, setClicked] = useState([false, false, false]);
+  const [clickedName, setClickedName] = useState("");
   const [userInput, setUserInput] = useRecoilState(userInputState);
 
   const btnList = ["Android", "IOS", "Web"];
@@ -48,41 +48,38 @@ const OsEnvButton = () => {
       ...userInput,
       os: e.target.value,
     });
-
-    // setUserInputData({
-    //   ...userInputData,
-    //   os: e.target.value,
-    // });
-    // console.log();
+    setClickedName(e.target.value);
   };
 
   return (
-    <OsBtnContainer>
-      {clicked.map((c, index) =>
-        clicked[index] ? (
-          <OsEnvBtn
-            key={index}
-            isActive
-            value={btnList[index]}
-            onClick={(e) => {
-              clickBtnHandler(e, index);
-            }}
-          >
-            {btnList[index]}
-          </OsEnvBtn>
-        ) : (
-          <OsEnvBtn
-            key={index}
-            value={btnList[index]}
-            onClick={(e) => {
-              clickBtnHandler(e, index);
-            }}
-          >
-            {btnList[index]}
-          </OsEnvBtn>
-        )
-      )}
-    </OsBtnContainer>
+    <>
+      <OsBtnContainer>
+        {clicked.map((c, index) =>
+          clicked[index] ? (
+            <OsEnvBtn
+              key={index}
+              isActive
+              value={btnList[index]}
+              onClick={(e) => {
+                clickBtnHandler(e, index);
+              }}
+            >
+              {btnList[index]}
+            </OsEnvBtn>
+          ) : (
+            <OsEnvBtn
+              key={index}
+              value={btnList[index]}
+              onClick={(e) => {
+                clickBtnHandler(e, index);
+              }}
+            >
+              {btnList[index]}
+            </OsEnvBtn>
+          )
+        )}
+      </OsBtnContainer>
+    </>
   );
 };
 

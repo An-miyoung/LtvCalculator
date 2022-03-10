@@ -1,6 +1,8 @@
 import React, { Dispatch, FunctionComponent, useCallback } from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
+import { isFileError } from "../../store/inputAtom";
 
 const FileInput = styled.div`
   position: absolute;
@@ -23,7 +25,7 @@ const DropZone = styled.div`
 
 const FileUploadDesc = styled.span`
   position: relative;
-  top: 26px;
+  top: -10px;
   display: block;
   width: 252px;
   height: 16px;
@@ -53,21 +55,29 @@ const DragDropInput: FunctionComponent<{ setFile: Dispatch<any> }> = ({
       multiple: false,
       accept: "text/csv, image/jpg, image/png, image/jpeg",
     });
+
+  const errorCheck = useRecoilValue(isFileError);
+  console.log(errorCheck);
+
   return (
     <div>
       <FileInput {...getRootProps()}>
         <input {...getInputProps()} />
 
         {isDragReject ? (
-          <DropZone style={{ border: "3px solid #F3694C" }}>
+          <DropZone style={{ border: "2px dashed #F3694C" }}>
             <FileUploadDesc
               style={{ color: "#F3694C", fontSize: "16px", fontWeight: "bold" }}
             >
               CSV 형식의 파일만 입력가능합니다.
             </FileUploadDesc>
           </DropZone>
+        ) : errorCheck ? (
+          <DropZone style={{ border: "2px dashed #F3694C" }}>
+            <FileUploadDesc>파일을 여기로 드래그하세요</FileUploadDesc>
+          </DropZone>
         ) : isDragAccept ? (
-          <DropZone style={{ border: "3px solid green" }} />
+          <DropZone style={{ border: "2px dashed #4a73f3" }} />
         ) : (
           <DropZone style={{ border: "2px dashed #4a73f3" }}>
             <FileUploadDesc>파일을 여기로 드래그하세요</FileUploadDesc>

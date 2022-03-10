@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
+import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { UserInputType } from "../../../types";
-import { userInputState } from "../../../store/inputAtom";
+import {
+  userInputState,
+  isShowError,
+  whichIsError,
+} from "../../../store/inputAtom";
 
 const Select = styled.select`
   width: 272px;
@@ -20,22 +23,29 @@ const Select = styled.select`
   }
 `;
 
-enum CategoryEnum {
-  game = "game",
-  vehicle = "vehicle",
-  finance = "finance",
-  blockchain = "blockchain",
-  health = "health",
-  food = "food",
-  contents = "contents",
-  retail = "retail",
-}
+const ErrorSpan = styled.span`
+  position: relative;
+  top: 0px;
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  color: #f3694c;
+  margin-left: 5px;
+`;
 
 const CategorySelect: React.FC = () => {
-  // const [inputValue, setInputValue] = useState<UserInputType>({});
   const [userInput, setUserInput] = useRecoilState(userInputState);
-  // const setCategory = useSetRecoilState(userInputState);
-  console.log({ userInput });
+  const errorCheck = useRecoilValue(isShowError);
+
+  const errorList = useRecoilValue(whichIsError);
+  console.log(errorList);
+
+  let errorCompare;
+  errorList.map((error: any) => {
+    if (error === "category") {
+      errorCompare = true;
+    }
+  });
 
   const handleSelect = (e: any) => {
     const value = e.target.value;
@@ -43,17 +53,7 @@ const CategorySelect: React.FC = () => {
       ...userInput,
       category: value,
     });
-    // setInputValue({ category: value });
-    // setCategory((prevState) => [...prevState, inputValue]);
   };
-
-  // const inputList = useRecoilValue(userInputState);
-
-  // useEffect(() => {
-  //   console.log("input: ", inputValue);
-  //   // setCategory((prevState) => [...prevState, inputValue]);
-  //   console.log(`userInputList: ${JSON.stringify(inputList)}`);
-  // }, [inputValue]);
 
   return (
     <form>
@@ -68,6 +68,15 @@ const CategorySelect: React.FC = () => {
         <option value="contents">컨텐츠/미디어</option>
         <option value="retail">유통/서비스</option>
       </Select>
+      {errorCheck && errorCompare ? (
+        <>
+          <img
+            src={require("../../../assets/errorWarning.png")}
+            alt="error warning"
+          />
+          <ErrorSpan>필수 입력 항목입니다.</ErrorSpan>
+        </>
+      ) : null}
     </form>
   );
 };

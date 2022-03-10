@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import AppDisplayProvider from "../provider/AppDisplayProvider";
 import Logo from "../assets/Logo.png";
 import LeftSection from "../components/stepCommon/LeftSection";
 import LtvStep3 from "../components/step3/LtvStep3";
 
 const Base = styled.div`
   width: 1440px;
-  height: 803px;
+  height: 1266px;
   margin: 0 auto;
   border: 1px solid black;
 `;
@@ -50,20 +49,18 @@ const Main = styled.div`
 
 const LtvInput = () => {
   return (
-    <AppDisplayProvider>
-      <Base>
-        <Header>
-          <LogoContianer>
-            <img src={Logo} alt="logo" />
-          </LogoContianer>
-          <LogoutBtn>로그아웃</LogoutBtn>
-        </Header>
-        <Main>
-          <LeftSection />
-          <LtvStep3 />
-        </Main>
-      </Base>
-    </AppDisplayProvider>
+    <Base>
+      <Header>
+        <LogoContianer>
+          <img src={Logo} alt="logo" />
+        </LogoContianer>
+        <LogoutBtn>로그아웃</LogoutBtn>
+      </Header>
+      <Main>
+        <LeftSection />
+        <LtvStep3 />
+      </Main>
+    </Base>
   );
 };
 

@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
-const UserInputContainer = styled.div`
-  margin-top: 65px;
-  margin-left: 20px;
-`;
+import ModalShow from "../stepCommon/modal/ModalShow";
 
 const InputContainer = styled.div`
-  width: 680px;
+  margin-top: 10px;
+  width: 100%;
   height: 124px;
   padding-top: 15px;
-  padding-left: 25px;
   background: #ffffff;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
   box-sizing: border-box;
   span {
     font-family: "Spoqa Han Sans Neo";
@@ -24,45 +18,59 @@ const InputContainer = styled.div`
     box-sizing: border-box;
   }
 `;
-const ModalTitle = styled.div`
-  font-family: "Spoqa Han Sans Neo";
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 21px;
-  color: #c0c0c0;
-`;
 
 const InputField = styled.div`
   display: flex;
-  /* width: 571px; */
-  height: 35px;
+  height: 90px;
   margin-top: 8px;
-  margin-left: 60px;
+`;
+
+const InputBox = styled.div`
+  height: 90px;
+  padding-left: 20px;
+  box-sizing: border-box;
 `;
 
 const Input = styled.input`
-  width: 140px;
-  height: 35px;
-  margin-right: 15px;
+  width: 220px;
+  height: 44px;
+  margin-right: 20px;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-weight: 300;
   font-size: 14px;
   line-height: 21px;
   color: #7e84a8;
   border: none;
-  background: #f5f5f5;
+  background: #fafafa;
   border-radius: 6px;
+  border-bottom: 1px solid #c0c0c0;
   &:focus {
     outline: none;
   }
 `;
 
+const InputTitle = styled.div`
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #4a73f3;
+`;
+
+const InputDesc = styled.div`
+  margin-bottom: 5px;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+  color: #999999;
+`;
+
 const Button = styled.input`
-  float: right;
-  bottom: 100px;
-  right: 24px;
-  width: 100px;
-  height: 35px;
+  width: 180px;
+  height: 50px;
+  margin-top: 45px;
+  margin-left: 56px;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-size: 14px;
   line-height: 21px;
@@ -76,26 +84,8 @@ const Button = styled.input`
   }
 `;
 
-const ShowContainer = styled.div`
-  display: flex;
-  width: 699px;
-  height: 103px;
-  margin-top: 20px;
-`;
-
-const ShowItem = styled.div`
-  width: 214px;
-  height: 103px;
-  background: #ffffff;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-right: 19px;
-  border: 1px solid red;
-`;
-
 const LtvResultInput: React.FC = () => {
-  const inputTitleList = ["ARPU", "CAC", "회원수"];
-  const [input, setInput] = useState({ arpu: "", cac: "", 회원수: "" });
+  const [input, setInput] = useState({ arpu: "", cac: "", users: "" });
 
   const handleChange = (e: any) => {
     console.log(e.target.value);
@@ -108,35 +98,45 @@ const LtvResultInput: React.FC = () => {
   };
 
   return (
-    <UserInputContainer>
-      <InputContainer>
-        <span>
-          우리 회사의 사용자 1명당 매출(ARPU), 고객획득비용(CAC), 회원수를
-          입력하세요.
-        </span>
-        <ModalTitle>ARPU,CAC 란?</ModalTitle>
-        <InputField>
+    <InputContainer>
+      <span>
+        우리 회사의 사용자 1명당 매출(ARPU) , 고객획득비용(CAC) , 회원수를
+        입력하세요.
+        <ModalShow
+          modalTitle={"ARPU 란?"}
+          descripton={
+            "계산된 LTV에 따라 회원 수를 늘리려면 15일동안 15,000원의 홍보비를 사용하여 15,000명의 사용자를 지속적으로 유입시켜야 합니다."
+          }
+          top={"-165px"}
+          left={"340px"}
+        />
+      </span>
+      <InputField>
+        <InputBox>
+          <InputTitle>ARPU</InputTitle>
+          <InputDesc>일 사용자 1명당 매출</InputDesc>
           <form onSubmit={handleSubmit}>
-            {inputTitleList.map((title, index) => (
-              <>
-                <Input
-                  key={index}
-                  name={title}
-                  placeholder={" " + " " + `${title}`}
-                  onChange={handleChange}
-                />
-              </>
-            ))}
-            <Button type="submit" value="입력" />
+            <Input name="arpu" onChange={handleChange} />
           </form>
-        </InputField>
-      </InputContainer>
-      <ShowContainer>
-        {inputTitleList.map((title, index) => (
-          <ShowItem key={index}>{title}</ShowItem>
-        ))}
-      </ShowContainer>
-    </UserInputContainer>
+        </InputBox>
+        <InputBox>
+          <InputTitle>CAC</InputTitle>
+          <InputDesc>고객 획득 비용</InputDesc>
+          <form onSubmit={handleSubmit}>
+            <Input name="cac" onChange={handleChange} />
+          </form>
+        </InputBox>
+        <InputBox>
+          <InputTitle>Users</InputTitle>
+          <InputDesc>회원 수</InputDesc>
+          <form onSubmit={handleSubmit}>
+            <Input name="users" onChange={handleChange} />
+          </form>
+        </InputBox>
+
+        <Button type="submit" value="입력" />
+      </InputField>
+    </InputContainer>
   );
 };
 

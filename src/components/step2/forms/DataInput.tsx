@@ -1,9 +1,11 @@
-import React, { useState, FunctionComponent, Dispatch } from "react";
-import { useRecoilState } from "recoil";
-import { userInputState } from "../../../store/inputAtom";
+import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  userInputState,
+  isShowError,
+  whichIsError,
+} from "../../../store/inputAtom";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
-import { UserInputType } from "../../../types";
 
 const Input = styled.input`
   width: 272px;
@@ -18,22 +20,11 @@ const Input = styled.input`
   color: #000000;
   box-sizing: border-box;
   cursor: pointer;
-  &:focus {
-    outline: none;
-  }
-`;
-const ErrorField = styled.div`
-  position: relative;
-  top: -61px;
-  width: 272px;
-  height: 54px;
-  border: 3px solid #f3694c;
-  border-radius: 10px;
 `;
 
 const ErrorSpan = styled.span`
   position: relative;
-  top: -61px;
+  top: 0px;
   font-family: "Spoqa Han Sans Neo", sans-serif;
   font-size: 12px;
   line-height: 18px;
@@ -41,69 +32,52 @@ const ErrorSpan = styled.span`
   margin-left: 5px;
 `;
 
-type FormData = {
-  data: string;
-};
-
-const DataInput: FunctionComponent<{
-  // setUserInputData: Dispatch<any>;
-  // userInputData: UserInputType;
-  id: string;
-  // }> = ({ setUserInputData, userInputData, title }) => {
-}> = ({ id }) => {
-  const [result, setResult] = useState("");
+const DataInput: React.FC<{ id: string }> = ({ id }) => {
   const [userInput, setUserInput] = useRecoilState(userInputState);
-  console.log({ userInput });
+  const errorCheck = useRecoilValue(isShowError);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+  const errorList = useRecoilValue(whichIsError);
+  console.log(errorList);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    // setResult(data.data);
+  let errorCompare;
+  errorList.map((error: any) => {
+    if (error === id) {
+      errorCompare = true;
+    }
+  });
+
+  const onSubmit = (data: any) => {
     setUserInput({
       ...userInput,
       [id]: data.data,
     });
-    // console.log(title);
-    // setUserInputData({
-    //   ...userInputData,
-    //   [title]: data.data,
-    // });
-  });
+  };
 
   const onChange = (e: any) => {
-    console.log(e.target.value);
-    // setResult(data.data);
     setUserInput({
       ...userInput,
       [id]: e.target.value,
     });
-    // console.log(title);
-    // setUserInputData({
-    //   ...userInputData,
-    //   [title]: data.data,
-    // });
   };
+  console.log(userInput[id]);
 
   return (
     <form>
-      <Input
-        type="text"
-        {...register("data", {
-          required: true,
-        })}
-        onChange={onChange}
-      />
-      {/* {errors.data?.type === "required" && ( */}
-      {userInput?.validateFail && !userInput[id] && (
+      {errorCheck && errorCompare ? (
         <>
-          <ErrorField />
+          <Input
+            type="text"
+            onChange={onChange}
+            style={{ border: "1px solid red" }}
+          />
+          <img
+            src={require("../../../assets/errorWarning.png")}
+            alt="error warning"
+          />
           <ErrorSpan>필수 입력 항목입니다.</ErrorSpan>
         </>
+      ) : (
+        <Input type="text" onChange={onChange} />
       )}
     </form>
   );

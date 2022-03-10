@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import useDisplayState from "../../hooks/useDisplayContext";
+import { useRecoilValue } from "recoil";
+import { StepBtnState } from "../../store/StepBtnAtom";
 import LeftSectionItem from "./LeftSectionItem";
 
 const Container = styled.div`
@@ -11,7 +12,7 @@ const Container = styled.div`
 `;
 
 function LeftSection() {
-  const displayState = useDisplayState();
+  const displayState = useRecoilValue(StepBtnState);
 
   return (
     <Container>
