@@ -13,30 +13,52 @@ const Button = styled.button`
   }
 `;
 
+const ModalTitle = styled.div`
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+`;
+
+const ModalDesc = styled.div`
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+`;
+
 const ModalBody = styled.div`
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   border-radius: 8px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   background: #fff;
-  max-height: calc(100vh-16px);
-  overflow: hidden auto;
+  /* height: 130px; */
+  /* overflow: hidden auto; */
   position: relative;
   padding-block: 12px;
   padding-inline: 24px;
 `;
 
 type ModalType = {
-  modalTitle: string;
-  descripton: string;
-  top: string;
-  left: string;
+  type: string;
+  modalTitle1?: string;
+  descripton1?: string;
+  modalTitle2?: string;
+  descripton2?: string;
+  top?: string;
+  left?: string;
 };
 
 const ModalShow: FunctionComponent<ModalType> = ({
-  modalTitle,
-  descripton,
+  type,
+  modalTitle1,
+  descripton1,
+  modalTitle2,
+  descripton2,
   top,
   left,
 }) => {
@@ -55,12 +77,25 @@ const ModalShow: FunctionComponent<ModalType> = ({
       <Button onClick={handleOpen}>
         <img src={Info} alt="Information" />
       </Button>
-      <Modal isOpen={isOpen} onClose={handleClose}>
-        <ModalBody style={{ top: top, left: left }}>
-          <span>{modalTitle}</span>
-          <p>{descripton}</p>
-        </ModalBody>
-      </Modal>
+      {type === "double" ? (
+        <Modal isOpen={isOpen} onClose={handleClose} selector="1266px">
+          <ModalBody style={{ top: top, left: left, height: "135px" }}>
+            <ModalTitle>{modalTitle1}</ModalTitle>
+            <ModalDesc>{descripton1}</ModalDesc>
+            <div style={{ height: "3px" }}>
+              <ModalTitle>{modalTitle2}</ModalTitle>
+              <ModalDesc>{descripton2}</ModalDesc>
+            </div>
+          </ModalBody>
+        </Modal>
+      ) : (
+        <Modal isOpen={isOpen} onClose={handleClose}>
+          <ModalBody style={{ top: top, left: left }}>
+            <ModalTitle>{modalTitle1}</ModalTitle>
+            <ModalDesc>{descripton1}</ModalDesc>
+          </ModalBody>
+        </Modal>
+      )}
     </>
   );
 };

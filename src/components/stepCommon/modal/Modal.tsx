@@ -52,10 +52,17 @@ const Modal: React.FC<Props> = ({ children, selector, isOpen, onClose }) => {
     >
       <div ref={nodeRef}>
         <Portal>
-          <Overlay>
-            <Dim onClick={onClose} />
-            <Container>{children}</Container>
-          </Overlay>
+          {selector ? (
+            <Overlay style={{ height: "1266px" }}>
+              <Dim onClick={onClose} />
+              <Container>{children}</Container>
+            </Overlay>
+          ) : (
+            <Overlay>
+              <Dim onClick={onClose} />
+              <Container>{children}</Container>
+            </Overlay>
+          )}
         </Portal>
       </div>
     </CSSTransition>

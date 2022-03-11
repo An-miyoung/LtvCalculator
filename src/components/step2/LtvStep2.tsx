@@ -179,8 +179,9 @@ const LtvStep2: React.FC = () => {
             <span>
               최장유지일
               <ModalShow
-                modalTitle={"최장유지일(retention days)이란?"}
-                descripton={
+                type="single"
+                modalTitle1={"최장유지일(retention days)이란?"}
+                descripton1={
                   "한번 유입된 고객이 자사의 고객으로 머무는 시간을 의미한다."
                 }
                 top={"260px"}

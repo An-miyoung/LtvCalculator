@@ -103,12 +103,17 @@ const LtvResultInput: React.FC = () => {
         우리 회사의 사용자 1명당 매출(ARPU) , 고객획득비용(CAC) , 회원수를
         입력하세요.
         <ModalShow
-          modalTitle={"ARPU 란?"}
-          descripton={
+          type="double"
+          modalTitle1={"ARPU 란?"}
+          descripton1={
             "계산된 LTV에 따라 회원 수를 늘리려면 15일동안 15,000원의 홍보비를 사용하여 15,000명의 사용자를 지속적으로 유입시켜야 합니다."
           }
-          top={"-165px"}
-          left={"340px"}
+          modalTitle2={"CAC 란?"}
+          descripton2={
+            "계산된 LTV에 따라 회원 수를 늘리려면 15일동안 15,000원의 홍보비를 사용하여 15,000명의 사용자를 지속적으로 유입시켜야 합니다."
+          }
+          top={"-390px"}
+          left={"310px"}
         />
       </span>
       <InputField>
