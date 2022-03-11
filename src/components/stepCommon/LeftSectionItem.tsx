@@ -1,15 +1,11 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { LeftSectionDisplay } from "../../types";
-import { useRecoilState } from "recoil";
-import { isShowError, isFileError } from "../../store/inputAtom";
-import { StepBtnState } from "../../store/StepBtnAtom";
 
 const Step = styled.div`
   width: 200px;
   height: 40px;
   display: flex;
-  cursor: pointer;
 `;
 
 const StepLogo = styled.button`
@@ -19,7 +15,6 @@ const StepLogo = styled.button`
   background-color: ${(props) => props.color};
   border-radius: 50%;
   border: none;
-  cursor: pointer;
   img {
     position: absolute;
     top: 10px;
@@ -60,12 +55,6 @@ type displayProps = {
 
 function LeftSectionItem({ display }: displayProps) {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const [stepBtn, setStepBtn] = useRecoilState(StepBtnState);
-
-  const [errorStep1, setErrorStep1] = useRecoilState(isFileError);
-  const [errorStep2, setErrorStep2] = useRecoilState(isShowError);
 
   const setColor = () => {
     switch (location.pathname) {
@@ -80,22 +69,9 @@ function LeftSectionItem({ display }: displayProps) {
     }
   };
 
-  const handleClick = () => {
-    if (display.step === "2" && stepBtn[0].done) {
-      navigate("/ltvCal/input");
-    } else if (display.step === "2" && !stepBtn[0].done) {
-      setErrorStep1(true);
-    } else if (display.step === "3" && stepBtn[1].done) {
-      console.log(display.step);
-      console.log(stepBtn[1].done);
-      setErrorStep2(false);
-      navigate("/ltvCal/result");
-    } else setErrorStep2(true);
-  };
-
   return (
     <>
-      <Step key={display.step} onClick={handleClick}>
+      <Step key={display.step}>
         <StepLogo color={setColor()}>
           {display.done ? (
             <img

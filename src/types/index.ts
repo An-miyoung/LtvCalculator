@@ -13,3 +13,9 @@ export type UserInputType = {
   retentionDays?: string;
   [propsName: string]: any;
 };
+
+export type DisplayDesc = {
+  step: string;
+  title: string;
+  desc: string;
+};
