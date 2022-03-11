@@ -75,6 +75,13 @@ function BottomMoveButton({ display }: displayProps) {
     } else return "#999999";
   };
 
+  const previous = () => {
+    navigate(-1);
+    if (location.pathname === "/ltvCal") {
+      console.log("협업하는 사람과 연결된 페이지로 가세요");
+    }
+  };
+
   const handleClick = () => {
     console.log("clicked");
     if (display.step === "1" && stepBtn[0].done) {
@@ -92,7 +99,7 @@ function BottomMoveButton({ display }: displayProps) {
   return (
     <div>
       <ButtonField>
-        <PrevButton>
+        <PrevButton onClick={previous}>
           <span>이전</span>
         </PrevButton>
         <NextButton onClick={handleClick} color={setColor()}>
