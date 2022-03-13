@@ -26,8 +26,7 @@ const ModalBody = styled.div`
 const ShareTitle = styled.div`
   width: 236px;
   height: 21px;
-  margin-top: 15px;
-  margin-left: 15px;
+  margin: 15px auto;
   font-family: "Spoqa Han Sans Neo", sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -39,8 +38,7 @@ const ShareTitle = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   width: 200px;
-  margin-top: 15px;
-  margin-left: 40px;
+  margin: 15px auto;
   justify-content: space-between;
 `;
 

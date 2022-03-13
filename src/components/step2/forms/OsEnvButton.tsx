@@ -9,7 +9,7 @@ interface BtnProps {
 
 const OsBtnContainer = styled.div`
   display: flex;
-  width: 272px;
+  width: 280px;
   justify-content: space-between;
 `;
 

@@ -34,7 +34,6 @@ const TopicContainer = styled.div`
 const Topic = styled.button<tabProps>`
   width: 245px;
   height: 50px;
-  padding-top: 10px;
   border: 1px solid #f5f5f5;
   box-sizing: border-box;
   border-radius: 8px 8px 0px 0px;
@@ -57,21 +56,25 @@ const Card = styled.div`
   background: #f5f5f5;
   border-radius: 0px 0px 10px 10px;
   box-sizing: border-box;
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #07145a;
 `;
 
 const FileDescription: React.FC = () => {
-  const [clicked, setClicked] = useState([true, false, false]);
-
   const [displayDesc, setDisplayDesc] = useState<DisplayDesc[]>([
     {
       step: "1",
       title: "Firebase",
-      desc: "Firebase에서 프로젝트를 먼저 생성한다",
+      desc: "Firebase는 앱을 빌드하고 실행하는 데 도움이 됩니다. Google에서 제공합니다. Firebase를 팀에서 즐겨 사용하는 도구에 쉽게 통합할 수 있습니다. Google에서 제공합니다. Customize Your App. Boost App Engagement. Release Apps Confidently. 15+ Products & Solutions.",
     },
     {
       step: "2",
       title: "Google Analytics",
-      desc: "머신을 돌려서 Retention을 생성한다",
+      desc: "구글 애널리틱스는 현재 구글 마케팅 플랫폼 브랜드 내의 플랫폼으로서, 웹사이트 트래픽을 추적하고 보고하는 구글이 제공하는 웹 애널리틱스 서비스이다. 구글은 2005년 11월 Urchin을 인수한 이후 이 서비스를 런칭했다",
     },
     {
       step: "3",
@@ -80,36 +83,29 @@ const FileDescription: React.FC = () => {
     },
   ]);
 
+  const [clicked, setClicked] = useState(0);
+
   const clickBtnHandler = (e: any, clickedIndex: number) => {
-    const newClicked = clicked.map((c, index) => {
-      return index === clickedIndex ? !c : false;
-    });
-    setClicked(newClicked);
+    setClicked(clickedIndex);
   };
 
   return (
     <Container>
       <DescTitle>CSV 파일은 어떻게 구성해야 할까요?</DescTitle>
       <TopicContainer>
-        {clicked.map((c, index) =>
-          clicked[index] ? (
-            <>
-              <Topic
-                key={index}
-                isActive
-                onClick={(e) => clickBtnHandler(e, index)}
-              >
-                <span>{displayDesc[index].title}</span>
-              </Topic>
-              <Card>{displayDesc[index].desc}</Card>
-            </>
-          ) : (
-            <Topic key={index} onClick={(e) => clickBtnHandler(e, index)}>
-              <span>{displayDesc[index].title}</span>
-            </Topic>
-          )
-        )}
+        {displayDesc.map((display, index) => (
+          <Topic
+            key={index}
+            isActive={index === clicked}
+            onClick={(e) => clickBtnHandler(e, index)}
+          >
+            {display.title}
+          </Topic>
+        ))}
       </TopicContainer>
+      <div>
+        <Card>{displayDesc[clicked].desc}</Card>
+      </div>
     </Container>
   );
 };

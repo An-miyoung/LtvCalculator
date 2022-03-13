@@ -1,6 +1,10 @@
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { LeftSectionDisplay } from "../../types";
+import Step1 from "../../assets/step1.png";
+import Step2 from "../../assets/step2.png";
+import Step3 from "../../assets/step3.png";
+import StepComplete from "../../assets/stepComplete.png";
 
 const Step = styled.div`
   width: 200px;
@@ -56,6 +60,8 @@ type displayProps = {
 function LeftSectionItem({ display }: displayProps) {
   const location = useLocation();
 
+  const stepImage = [Step1, Step2, Step3];
+
   const setColor = () => {
     switch (location.pathname) {
       case "/ltvCal/input":
@@ -75,13 +81,13 @@ function LeftSectionItem({ display }: displayProps) {
         <StepLogo color={setColor()}>
           {display.done ? (
             <img
-              src={require(`../../assets/stepComplete.png`)}
+              src={StepComplete}
               alt={`step${display.step}`}
               style={{ top: "0", left: "0" }}
             />
           ) : (
             <img
-              src={require(`../../assets/step${display.step}.png`)}
+              src={stepImage[parseInt(display.step) - 1]}
               alt={`step${display.step}`}
             />
           )}

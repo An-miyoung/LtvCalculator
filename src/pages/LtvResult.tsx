@@ -8,6 +8,7 @@ const Base = styled.div`
   width: 1440px;
   height: 1266px;
   margin: 0 auto;
+  background: #fafafa;
   border: 1px solid black;
 `;
 

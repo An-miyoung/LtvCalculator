@@ -3,9 +3,8 @@ import styled from "styled-components";
 import ModalShow from "../stepCommon/modal/ModalShow";
 
 const InputContainer = styled.div`
-  margin-top: 10px;
   width: 100%;
-  height: 124px;
+  height: 135px;
   padding-top: 15px;
   background: #ffffff;
   box-sizing: border-box;
@@ -69,7 +68,7 @@ const InputDesc = styled.div`
 const Button = styled.input`
   width: 180px;
   height: 50px;
-  margin-top: 45px;
+  margin-top: 42px;
   margin-left: 56px;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-size: 14px;

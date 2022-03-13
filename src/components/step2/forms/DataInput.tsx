@@ -8,7 +8,7 @@ import {
 import styled from "styled-components";
 
 const Input = styled.input`
-  width: 272px;
+  width: 280px;
   height: 54px;
   padding-left: 10px;
   margin-bottom: 5px;

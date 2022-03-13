@@ -59,7 +59,7 @@ const EmailText = styled.div`
 `;
 
 const InputField = styled.div`
-  width: 272px;
+  width: 280px;
   height: 54px;
   background: #ffffff;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -79,7 +79,7 @@ const ErrorSpan = styled.span`
 const LocationButton = styled.div`
   position: absolute;
   top: 615px;
-  left: 235px;
+  left: 238px;
 `;
 
 const LtvStep2: React.FC = () => {
@@ -116,8 +116,6 @@ const LtvStep2: React.FC = () => {
           return display;
         })
       );
-      console.log("true인경우: ", userInput);
-      console.log("true인경우: ", displayState);
     }
   }, [inputComplete, setDisplaySatete]);
 
