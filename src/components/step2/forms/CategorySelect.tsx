@@ -8,7 +8,7 @@ import {
 } from "../../../store/inputAtom";
 
 const Select = styled.select`
-  width: 272px;
+  width: 275px;
   height: 54px;
   margin-left: 10px;
   border: none;
