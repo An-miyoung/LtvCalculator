@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { UserInputType } from "../types";
+import { UserInputType, ResultInputType } from "../types";
 
 export const userInputState = atom<UserInputType>({
   key: "userInputState",
@@ -44,5 +44,14 @@ export const whichIsError = selector({
       if (obj[keys] === "") errorObj.push(keys);
     }
     return errorObj;
+  },
+});
+
+export const resultInputState = atom<ResultInputType>({
+  key: "resultInputState",
+  default: {
+    arpu: 0,
+    cac: 0,
+    users: 0,
   },
 });

@@ -1,21 +1,42 @@
 import React, { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { resultInputState } from "../../store/inputAtom";
 import ModalShow from "../stepCommon/modal/ModalShow";
+import DataInput from "./DataInput2";
+import Set from "../../assets/set.png";
 
 const InputContainer = styled.div`
+  position: relative;
   width: 100%;
   height: 135px;
   padding-top: 15px;
   background: #ffffff;
   box-sizing: border-box;
   span {
-    font-family: "Spoqa Han Sans Neo";
+    font-family: "Spoqa Han Sans Neo", sans-serif;
     font-weight: bold;
     font-size: 15px;
     line-height: 22px;
     color: #07145a;
     box-sizing: border-box;
   }
+`;
+
+const InitialSet = styled.div`
+  position: absolute;
+  width: 60px;
+  height: 21px;
+  left: 900px;
+  top: 15px;
+  span {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #7d7d7d;
+  }
+  cursor: pointer;
 `;
 
 const InputField = styled.div`
@@ -28,24 +49,6 @@ const InputBox = styled.div`
   height: 90px;
   padding-left: 20px;
   box-sizing: border-box;
-`;
-
-const Input = styled.input`
-  width: 220px;
-  height: 44px;
-  margin-right: 20px;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 21px;
-  color: #7e84a8;
-  border: none;
-  background: #fafafa;
-  border-radius: 6px;
-  border-bottom: 1px solid #c0c0c0;
-  &:focus {
-    outline: none;
-  }
 `;
 
 const InputTitle = styled.div`
@@ -84,16 +87,15 @@ const Button = styled.input`
 `;
 
 const LtvResultInput: React.FC = () => {
+  const [resultState, setResultState] = useRecoilState(resultInputState);
   const [input, setInput] = useState({ arpu: "", cac: "", users: "" });
 
-  const handleChange = (e: any) => {
-    console.log(e.target.value);
-    setInput({ ...input, arpu: e.target.value });
+  const initialClick = () => {
+    setResultState({ arpu: 0, cac: 0, users: 0 });
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(input);
+  const handleSubmit = () => {
+    setResultState({ arpu: 0, cac: 0, users: 0 });
   };
 
   return (
@@ -115,27 +117,29 @@ const LtvResultInput: React.FC = () => {
           left={"310px"}
         />
       </span>
+
+      <InitialSet onClick={initialClick}>
+        <form onSubmit={handleSubmit}>
+          <span>{`초기화` + " "}</span>
+          <img src={Set} alt="set initial" />
+        </form>
+      </InitialSet>
+
       <InputField>
         <InputBox>
           <InputTitle>ARPU</InputTitle>
           <InputDesc>일 사용자 1명당 매출</InputDesc>
-          <form onSubmit={handleSubmit}>
-            <Input name="arpu" onChange={handleChange} />
-          </form>
+          <DataInput id="arpu" />
         </InputBox>
         <InputBox>
           <InputTitle>CAC</InputTitle>
           <InputDesc>고객 획득 비용</InputDesc>
-          <form onSubmit={handleSubmit}>
-            <Input name="cac" onChange={handleChange} />
-          </form>
+          <DataInput id="cac" />
         </InputBox>
         <InputBox>
           <InputTitle>Users</InputTitle>
           <InputDesc>회원 수</InputDesc>
-          <form onSubmit={handleSubmit}>
-            <Input name="users" onChange={handleChange} />
-          </form>
+          <DataInput id="users" />
         </InputBox>
 
         <Button type="submit" value="입력" />
