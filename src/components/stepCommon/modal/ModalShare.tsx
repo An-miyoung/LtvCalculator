@@ -9,6 +9,10 @@ const Button = styled.button`
   }
 `;
 
+const Share = styled.div`
+  cursor: pointer;
+`;
+
 const ModalBody = styled.div`
   position: fixed;
   height: 194px;
@@ -51,6 +55,12 @@ const ModalShare = () => {
 
   const handleClose = () => {
     setIsOpen(false);
+  };
+
+  const clickFacebook = () => {
+    window.open(
+      "https://www.facebook.com/sharer/sharer.php?u=https://naver.com/"
+    );
   };
 
   return (
@@ -97,7 +107,7 @@ const ModalShare = () => {
             </div>
           </FlexContainer>
           <FlexContainer>
-            <div>
+            <Share onClick={clickFacebook}>
               <div>
                 <img
                   src={require("../../../assets/Facebook.png")}
@@ -110,7 +120,7 @@ const ModalShare = () => {
                   alt="Facebook"
                 />
               </div>
-            </div>
+            </Share>
             <div>
               <div>
                 <img
