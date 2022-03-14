@@ -37,6 +37,8 @@ const DescriptionTitle = styled.span`
   display: block;
   margin-top: 17px;
   margin-left: 20px;
+  margin-bottom: 25px;
+  padding-top: 17px;
   width: 140px;
   height: 27px;
   font-family: "Spoqa Han Sans Neo", sans-serif;
@@ -44,6 +46,7 @@ const DescriptionTitle = styled.span`
   font-size: 18px;
   line-height: 27px;
   color: #f3694c;
+  box-sizing: border-box;
 `;
 
 const Description = styled.span`
