@@ -3,6 +3,8 @@ import styled from "styled-components";
 import LtvResultInput from "./LtvResultInput";
 import ModalShare from "../stepCommon/modal/ModalShare";
 import LtvChart from "./LtvChart";
+import LtvGrowthPlus from "./LtvGrowthPlus";
+import LtvGrowthMinus from "./LtvGrowthMinus";
 
 const Container = styled.div`
   position: relative;
@@ -94,6 +96,7 @@ type tabProps = {
 const LtvStep3: React.FC = () => {
   const [clicked, setClicked] = useState(0);
   const [input, setInput] = useState({ arpu: "", cac: "", 회원수: "" });
+  const result = 1;
 
   const displayDesc = ["LTV 결과", "Growth 결과"];
 
@@ -133,9 +136,11 @@ const LtvStep3: React.FC = () => {
         <LtvChartContainer>
           <LtvChart />
         </LtvChartContainer>
+      ) : result > 0 ? (
+        <LtvGrowthPlus />
       ) : (
         <div>
-          <h1>준비중</h1>
+          <LtvGrowthMinus />
         </div>
       )}
 
