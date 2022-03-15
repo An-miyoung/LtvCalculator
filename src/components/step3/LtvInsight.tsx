@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import ModalShow from "../stepCommon/modal/ModalShow";
+import ContactUs from "../stepCommon/modal/ContactUs";
 
 const Container = styled.div`
   position: relative;
@@ -62,25 +62,25 @@ const Description = styled.span`
   color: #000000;
 `;
 
-const BottomBtnContainer = styled.div`
-  position: absolute;
-  margin-top: 50px;
-  right: 15px;
-`;
+// const BottomBtnContainer = styled.div`
+//   position: absolute;
+//   margin-top: 50px;
+//   right: 15px;
+// `;
 
-const BottomBtn = styled.button`
-  width: 260px;
-  height: 44px;
-  background: #0420bf;
-  border-radius: 8px;
-  font-family: "SpoqaHanSans";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
-  border: none;
-`;
+// const BottomBtn = styled.button`
+//   width: 260px;
+//   height: 44px;
+//   background: #0420bf;
+//   border-radius: 8px;
+//   font-family: "SpoqaHanSans";
+//   font-style: normal;
+//   font-weight: 700;
+//   font-size: 16px;
+//   line-height: 24px;
+//   color: #ffffff;
+//   border: none;
+// `;
 
 const LtvInsight: React.FC = () => {
   return (
@@ -113,9 +113,7 @@ const LtvInsight: React.FC = () => {
           100,000,000명의 사용자를 지속적으로 유입시켜야 합니다.
         </Description>
       </InsightContainer>
-      <BottomBtnContainer>
-        <BottomBtn>다봤어요!!</BottomBtn>
-      </BottomBtnContainer>
+      <ContactUs />
     </Container>
   );
 };

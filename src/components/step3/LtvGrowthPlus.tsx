@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import GrowthBarChart from "./chart/GrowthBarChart";
+import ContactUs from "../stepCommon/modal/ContactUs";
 
 const Container = styled.div`
   position: relative;
@@ -83,26 +84,6 @@ const Line = styled.div`
   border-left: 2px solid #f5f5f5;
 `;
 
-const BottomBtnContainer = styled.div`
-  position: absolute;
-  margin-top: 30px;
-  right: 15px;
-`;
-
-const BottomBtn = styled.button`
-  width: 260px;
-  height: 44px;
-  background: #0420bf;
-  border-radius: 8px;
-  font-family: "SpoqaHanSans";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
-  border: none;
-`;
-
 const LtvChart: React.FC = () => {
   return (
     <Container>
@@ -122,9 +103,7 @@ const LtvChart: React.FC = () => {
         </ChartContiner>
         <Line />
       </GrowthContainer>
-      <BottomBtnContainer>
-        <BottomBtn>다봤어요!!</BottomBtn>
-      </BottomBtnContainer>
+      <ContactUs />
     </Container>
   );
 };

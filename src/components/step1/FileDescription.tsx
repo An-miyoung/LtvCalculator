@@ -11,10 +11,9 @@ const Container = styled.div`
 `;
 
 const DescTitle = styled.div`
-  width: 275px;
+  width: 800px;
   height: 29px;
   margin-top: 50px;
-  margin-left: 303px;
   font-family: "Noto Sans Thai Looped", sans-serif;
   font-weight: bold;
   font-size: 18px;

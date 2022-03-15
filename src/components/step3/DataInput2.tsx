@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { resultInputState } from "../../store/inputAtom";
 import styled from "styled-components";
 
@@ -7,6 +7,7 @@ const Input = styled.input`
   width: 220px;
   height: 44px;
   margin-right: 20px;
+  padding-left: 10px;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-weight: 700;
   font-size: 30px;
@@ -29,7 +30,6 @@ const Input = styled.input`
 `;
 
 const DataInput: React.FC<{ id: string }> = ({ id }) => {
-  const [input, setInput] = useState(0);
   const [userInput, setUserInput] = useRecoilState(resultInputState);
 
   let placeholderT = "";
@@ -50,13 +50,12 @@ const DataInput: React.FC<{ id: string }> = ({ id }) => {
       ...userInput,
       [id]: e.target.value,
     });
-    // setInput(0);
   };
   console.log(userInput);
 
   return (
     <form>
-      <Input type="text" onChange={onChange} value={userInput[id]} />
+      <Input type="text" onChange={onChange} placeholder={placeholderT} />
     </form>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import { resultInputState } from "../../store/inputAtom";
 import LtvResultInput from "./LtvResultInput";
 import ModalShare from "../stepCommon/modal/ModalShare";
 import LtvChart from "./LtvChart";
@@ -96,7 +98,9 @@ type tabProps = {
 const LtvStep3: React.FC = () => {
   const [clicked, setClicked] = useState(0);
   const [input, setInput] = useState({ arpu: "", cac: "", 회원수: "" });
-  const result = 1;
+  const resultState = useRecoilValue(resultInputState);
+
+  const result = resultState.arpu * 0.5 - resultState.cac;
 
   const displayDesc = ["LTV 결과", "Growth 결과"];
 

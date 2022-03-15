@@ -14,7 +14,6 @@ const Share = styled.div`
 `;
 
 const ModalBody = styled.div`
-  position: fixed;
   height: 194px;
   width: 276px;
   top: 0;

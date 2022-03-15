@@ -21,8 +21,8 @@ export type DisplayDesc = {
 };
 
 export type ResultInputType = {
-  arpu?: number;
-  cac?: number;
-  users?: number;
+  arpu: number;
+  cac: number;
+  users: number;
   [propsName: string]: any;
 };

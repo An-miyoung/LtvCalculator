@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { resultInputState } from "../../store/inputAtom";
@@ -88,14 +88,18 @@ const Button = styled.input`
 
 const LtvResultInput: React.FC = () => {
   const [resultState, setResultState] = useRecoilState(resultInputState);
-  const [input, setInput] = useState({ arpu: "", cac: "", users: "" });
 
   const initialClick = () => {
     setResultState({ arpu: 0, cac: 0, users: 0 });
+    window.location.replace("/ltvCal/result");
   };
 
   const handleSubmit = () => {
     setResultState({ arpu: 0, cac: 0, users: 0 });
+  };
+
+  const calulation = () => {
+    //  resultState.arpu* (LTV 결과값) > resultState.cac
   };
 
   return (
@@ -142,7 +146,7 @@ const LtvResultInput: React.FC = () => {
           <DataInput id="users" />
         </InputBox>
 
-        <Button type="submit" value="입력" />
+        <Button type="submit" value="입력" onClick={calulation} />
       </InputField>
     </InputContainer>
   );
