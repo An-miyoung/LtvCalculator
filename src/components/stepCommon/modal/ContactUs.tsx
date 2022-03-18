@@ -38,7 +38,7 @@ const ModalBody = styled.div`
 const FloatContainer = styled.div`
   position: absolute;
   width: 100%;
-  top: -80px;
+  top: -100px;
   left: 0;
   background-color: gray;
 `;
@@ -173,15 +173,20 @@ const ModalShare = () => {
           <AskBtnContainer>
             <AskBtn>문의하기</AskBtn>
           </AskBtnContainer>
-          <FloatContainer>
-            <ModalTitle>Contact 1z Labs</ModalTitle>
-            <ModalClose>
-              <img src={Close} alt="close" onClick={handleClose} />
-            </ModalClose>
-            <ModalDesc>
-              추가적인 컨설팅이 필요할 시 1z Labs로 연락하세요!
-            </ModalDesc>
-          </FloatContainer>
+          <div>
+            <div style={{ margin: "15px 15px" }}>
+              <ModalClose>
+                <img src={Close} alt="close" onClick={handleClose} />
+              </ModalClose>
+            </div>
+            <FloatContainer>
+              <ModalTitle>Contact 1z Labs</ModalTitle>
+
+              <ModalDesc>
+                추가적인 컨설팅이 필요할 시 1z Labs로 연락하세요!
+              </ModalDesc>
+            </FloatContainer>
+          </div>
         </ModalBody>
       </Modal>
     </>
