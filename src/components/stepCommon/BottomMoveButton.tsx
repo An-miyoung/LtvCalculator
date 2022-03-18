@@ -77,7 +77,7 @@ function BottomMoveButton({ display }: displayProps) {
 
   const previous = () => {
     navigate(-1);
-    if (location.pathname === "/ltvCal") {
+    if (location.pathname === "/ltvCal/") {
       console.log("협업하는 사람과 연결된 페이지로 가세요");
     }
   };

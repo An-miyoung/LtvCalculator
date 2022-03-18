@@ -3,6 +3,7 @@ import styled from "styled-components";
 import GraphGaugeChart from "./chart/GraphGaugeChart";
 import PointStyleChart from "./chart/PointStyleChart";
 import LtvInsight from "./LtvInsight";
+import ModalShow from "../stepCommon/modal/ModalShow";
 
 const FlexContiner = styled.div`
   display: flex;
@@ -40,7 +41,18 @@ const LtvChart: React.FC = () => {
     <>
       <FlexContiner>
         <GraphContainer>
-          <ChartTitle>Unicorn Index</ChartTitle>
+          <div style={{ display: "flex" }}>
+            <ChartTitle>Unicorn Index</ChartTitle>
+            <ModalShow
+              type="single"
+              modalTitle1={"Unicorn Index란?"}
+              descripton1={
+                "대부분의 VC에 따르면 이값은 4~5배입니다. 3배정도는 괜찮지만 이 3배는 수억개의 수익을 창출할 때 1.5~2배로 빠르게 압축됩니다."
+              }
+              top={"0px"}
+              left={"0px"}
+            />
+          </div>
           <Graph>
             <GraphGaugeChart />
           </Graph>

@@ -62,26 +62,6 @@ const Description = styled.span`
   color: #000000;
 `;
 
-// const BottomBtnContainer = styled.div`
-//   position: absolute;
-//   margin-top: 50px;
-//   right: 15px;
-// `;
-
-// const BottomBtn = styled.button`
-//   width: 260px;
-//   height: 44px;
-//   background: #0420bf;
-//   border-radius: 8px;
-//   font-family: "SpoqaHanSans";
-//   font-style: normal;
-//   font-weight: 700;
-//   font-size: 16px;
-//   line-height: 24px;
-//   color: #ffffff;
-//   border: none;
-// `;
-
 const LtvInsight: React.FC = () => {
   return (
     <Container>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
+import Close from "../../../assets/x.png";
 
 const BottomBtnContainer = styled.div`
   position: absolute;
@@ -53,6 +54,10 @@ const ModalTitle = styled.div`
   line-height: 38px;
   box-sizing: border-box;
   color: #fff;
+`;
+const ModalClose = styled.div`
+  float: right;
+  cursor: pointer;
 `;
 
 const ModalDesc = styled.div`
@@ -170,6 +175,9 @@ const ModalShare = () => {
           </AskBtnContainer>
           <FloatContainer>
             <ModalTitle>Contact 1z Labs</ModalTitle>
+            <ModalClose>
+              <img src={Close} alt="close" onClick={handleClose} />
+            </ModalClose>
             <ModalDesc>
               추가적인 컨설팅이 필요할 시 1z Labs로 연락하세요!
             </ModalDesc>
